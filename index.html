@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">  <!-- nhúng file momalizes cdn để cung cáp tính nhất quán trên nhiều trình duyệt -->
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/grid.css">
+    <link rel="stylesheet" href="./assets/css/responsive.css">
+    <link rel="stylesheet" href="./assets/fonts/fontawesome-free-6.4.0-web/css/all.min.css">
+    <link rel="stylesheet" href="./assets/fonts/themify-icons/themify-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet"> <!-- nhúng phông chữ -->
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <div class="music">
+        <!-- dasboard -->
+        <div class="dasboard">
+            <!-- header -->
+            <header class="header">
+                <label class="header_play-list " for="check-show-list">
+                    <i class="header_play-list-icon ti-music-alt"></i>
+                    <span class="header-desc">Show playlist</span>
+                </label>
+                
+                <div class="header_title">
+                    <h4 class="header_title-desc">Now playing</h4>
+                </div>
+                
+                <div class="header_favorite-song">
+                    <i class=" header_favorite-song-icon fa-solid fa-heart"></i>
+                    <span class="header-desc">Add favorite</span>
+                    <span class="header-desc hiden">Remove favorite</span>
+                </div>
+                
+            </header>
+            <!-- cd -->
+            <div class="cd">
+                <div class="cd-thum"></div>
+            </div>
+
+            <!-- music-name -->
+            <div class="music-name-author">
+                <h3 class="music-name"></h3>
+                <h5 class="music-author"></h5>
+            </div>
+
+            <!-- range time-->
+            <div class="range-time">
+                <span class="range-time_current">00:00</span>
+                <input type="range" class="range-time-input" name="range-time" id="range-time-input-id" min="0" max="100" value="0" >
+                <span class="range-time_remaining">3:24</span>
+            </div>
+            <!-- range volumn -->
+            <div class="range-volumn">
+                <i class="range-volumn_icon range-volumn_icon-decrease fa-solid fa-volume-low"></i>
+                <input type="range" class="range-volumn_input" name="range-volumn" id="range-volumn_input-id" min="1" max="100" value="99" onchange="setVolumn()">
+                <i class="range-volumn_icon range-volumn_icon-increase fa-solid fa-volume-high"></i>
+            </div>
+                       
+
+            <!-- control -->
+            <ul class="control">
+                <li class="btn btn-repeat">
+                    <i class="btn-icon fa-solid fa-rotate-right"></i>
+                </li>
+                <li class="btn btn-prev">
+                    <i class="btn-icon fa-solid fa-backward-step"></i>
+                </li>
+                <li class="btn btn-play-pause">
+                    <i class="btn-icon fa-solid fa-play icon-play "></i>
+                    <i class="btn-icon fa-solid fa-pause icon-pause hiden "></i>
+                </li>
+                <li class="btn btn-next">
+                    <i class="btn-icon fa-solid fa-forward-step"></i>
+                </li>
+                <li class="btn btn-ramdom">
+                    <i class="btn-icon fa-solid fa-shuffle"></i>
+                </li>
+            </ul>
+
+        </div>
+        <!-- play list -->
+        <input hidden type="checkbox" name="" id="check-show-list" class="check-show-list-class">
+        <div class="play-list">
+            <div class="play-list_head">
+                <h2 class="play-list_head-heading">My playlist</h2>
+                <label for="check-show-list" class="play-list_head-icon-close fa-solid fa-xmark"></label>
+            </div>
+            <div class="play-list_content">
+                <ul class="list-music">
+                    
+                </ul>
+
+            </div>
+        </div>
+        <label for="check-show-list" class="modal">
+
+        </label>
+        <script src="./assets/js/main.js"></script>
+    </div>
+</body>
+</html>
