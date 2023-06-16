@@ -57,11 +57,11 @@
             <!-- range volumn -->
             <div class="range-volumn">
                 <i class="range-volumn_icon range-volumn_icon-decrease fa-solid fa-volume-low"></i>
-                <input type="range" class="range-volumn_input" name="range-volumn" id="range-volumn_input-id" min="1" max="100" value="99" onchange="setVolumn()">
+                <input type="range" class="range-volumn_input" name="range-volumn" id="range-volumn_input-id" min="0" step="1" max="100" value="99" onchange="setVolumn()">
                 <i class="range-volumn_icon range-volumn_icon-increase fa-solid fa-volume-high"></i>
             </div>
-                       
-
+            <audio id="myAudio" src=""></audio>    
+            <link rel="stylesheet" href="">
             <!-- control -->
             <ul class="control">
                 <li class="btn btn-repeat">
@@ -72,7 +72,7 @@
                 </li>
                 <li class="btn btn-play-pause">
                     <i class="btn-icon fa-solid fa-play icon-play "></i>
-                    <i class="btn-icon fa-solid fa-pause icon-pause hiden "></i>
+                    <i class="btn-icon fa-solid fa-pause icon-pause "></i>
                 </li>
                 <li class="btn btn-next">
                     <i class="btn-icon fa-solid fa-forward-step"></i>

@@ -1,7 +1,33 @@
 // 1. render song tạo ra danh sách bài hát
+// 2. Play, pause, seek
+// 3. CD rotate
+// 4. Next, prev
+// 5. random
+// 6. Next, repeat when ended
+// 7. active song
+// 8. scroll active song into view
+// 9. play song when click
+const $ = document.querySelector.bind(document);
+const $$ = document.querySelectorAll.bind(document);
+
+const music = $('.music');
 const playlist = document.querySelector('.list-music');
-console.log(playlist);
+const songNameCurrent =  document.querySelector('.music-name');
+const songImgCurrent = document.querySelector('.cd .cd-thum');
+const songAuthorCurrent = document.querySelector('.music-author');
+const audio = $('#myAudio');
+const btnPlay = document.querySelector('.btn-play-pause');
+const cd = document.querySelector('.cd .cd-thum');
+const rangeTime = document.getElementById('range-time-input-id');
+const btnNext = document.querySelector('.btn-next');
+const btnPrev = document.querySelector('.btn-prev');
+const btnRandom = $('.btn-ramdom');
+const btnRepeat = $('.btn-repeat');
 const app = {
+    currentIndex: 0,
+    isPlaying: false,
+    isRandom: false,
+    isRepeat: false,
     songs: [
         {
             name: 'Real Love',
@@ -28,24 +54,21 @@ const app = {
             imgage: './assets/img/cd/tinhdau.jpg'
         },
         {
-            name: 'Real love',
-            singer: 'My Anh x Khắc Hưng',
-            path: './assets/mp3/Real-Love-The-Heroes-Version-My-Anh-Khac-Hung.mp3',
-            imgage: './assets/img/cd/REALLOVE.jpg'
+            name: 'Hoa Cỏ Lau',
+            singer: 'Phong Max',
+            path: './assets/mp3/Hoa Cỏ Lau Lofi (Ver 2) - Phong Max x Bụi Chill - Giữa Mênh Mang Đồi Hoa Cỏ Lau - Lyrics Video.mp3',
+            imgage: './assets/img/cd/hoacolau.jpg'
         },
-        {
-            name: 'Real love',
-            singer: 'My Anh x Khắc Hưng',
-            path: './assets/mp3/Real-Love-The-Heroes-Version-My-Anh-Khac-Hung.mp3',
-            imgage: './assets/img/cd/REALLOVE.jpg'
-        },
-        {
-            name: 'Real love',
-            singer: 'My Anh x Khắc Hưng',
-            path: './assets/mp3/Real-Love-The-Heroes-Version-My-Anh-Khac-Hung.mp3',
-            imgage: './assets/img/cd/REALLOVE.jpg'
-        },
+        
     ],
+    defineProperties: function() {
+        Object.defineProperty(this,'currentSong',{
+            get: function() {
+                return this.songs[this.currentIndex]
+            }
+        })
+    },
+
 
     render: function() {
         const htmls = this.songs.map(function(song) {
@@ -60,7 +83,6 @@ const app = {
             <div class="item-music_options">
                 <i class="item-music_options-icon ti-more-alt"></i>
             </div>
-            <audio id="myAudio" src="${song.path}"></audio>
         </li>
         `
         })
@@ -69,17 +91,155 @@ const app = {
     },
 
     loadCurrentSong: function() {
-        const songNameCurrent =  document.querySelector('.music-name');
-        const songImgCurrent = document.querySelector('.cd .cd-thum');
-        const songAuthorCurrent = document.querySelector('.music-author');
-        songNameCurrent.textContent = `${this.songs[Math.floor(Math.random() *6)].name}`;
-        songAuthorCurrent.textContent = `${this.songs[Math.floor(Math.random() *6)].singer}`;
-        songImgCurrent.style.backgroundImage = `url(${this.songs[Math.floor(Math.random() * 6)].imgage})`;
+        audio.src = this.currentSong.path;
+        songNameCurrent.textContent = `${this.currentSong.name}`;
+        songAuthorCurrent.textContent = `${this.currentSong.singer}`;
+        songImgCurrent.style.backgroundImage = `url(${this.currentSong.imgage})`;
     },
 
-    start: function() {
-        this.render();
+
+    handleEvents: function() {
+        const _this = this;
+
+        // xử lý cd quay khi start vào dừng quay khi pause
+        // sử dụng animate 
+        cdAnimate = cd.animate(
+            [
+                { transform: "rotate(360deg)"} // hiệu ứng xoay
+            ],
+            {
+                duration: 10000,// thời gian thực hiện hiệu ứng
+                iterations: Infinity,// vòng lặp hiệu ứng
+            }
+            )
+            cdAnimate.pause();    
+
+       // khi bấm vào nút play thì phát nhạc
+        btnPlay.onclick = function() {
+            if(_this.isPlaying) {
+                audio.pause();
+            }
+            else {
+                audio.play();
+            }
+            
+        }
+
+        // khi song được play
+        audio.onplay = function() {
+            _this.isPlaying = true;
+            music.classList.add('playing');
+            cdAnimate.play();
+        }
+
+        // khi song bị pause 
+        audio.onpause = function() {
+            _this.isPlaying = false;
+            music.classList.remove('playing');
+            cdAnimate.pause();
+        }
+        
+
+        // khi tiến độ bài hát thay đổi
+        audio.ontimeupdate = function() {
+            if(audio.duration) {
+                const rangeTimePercet = Math.floor(audio.currentTime/ audio.duration * 100);
+                rangeTime.value = rangeTimePercet;
+            }
+        }
+
+        // xử lý khi tua bài hát
+        rangeTime.onchange = function(e) {
+            const seekTime = e.target.value / 100 * audio.duration;
+            audio.currentTime = seekTime;
+        }
+
+        // xử lý next bài hát
+        btnNext.onclick = function() {
+            if(_this.isRandom) {
+                _this.ranDomSong();
+            }
+            else {
+                _this.nextSong();
+            }
+            audio.play();
+        }
+
+        // xử lý prev bài hát
+        btnPrev.onclick = function() {
+            if(_this.isRandom) {
+                _this.ranDomSong();
+            }
+            else {
+                _this.prevSong();
+            }
+            audio.play();
+        }
+
+        //xử lý khi random bài hát
+        btnRandom.onclick = function(e) {
+            _this.isRandom = !_this.isRandom;
+            e.target.classList.toggle('active',_this.isRandom);
+            // dùng toggle đối số thứ 2 là boolean nếu là true thì 
+            // add class còn nếu là false thì xóa class.
+        }
+
+        btnRepeat.onclick = function(e) {
+            _this.isRepeat = !_this.isRepeat;
+            e.target.classList.toggle('active',_this.isRepeat);
+            // dùng toggle đối số thứ 2 là boolean nếu là true thì 
+            // add class còn nếu là false thì xóa class.
+        }
+
+        //xử lý next song khi audio ended
+        // onended là sự kiện khi kết thúc một bài hát
+        audio.onended = function() {
+            // nghĩa là khi hết một bài thì nó lại thực hiện hành vi click vào nút next
+            btnNext.click()
+        }
+ 
+    },
+    nextSong: function() {
+        this.currentIndex ++;
+        if(this.currentIndex >= this.songs.length) {
+            this.currentIndex = 0;
+        }
         this.loadCurrentSong();
+    },
+    prevSong: function() {
+        this.currentIndex -= 1;
+        if(this.currentIndex < 0) {
+            this.currentIndex = this.songs.length - 1;
+        }
+        this.loadCurrentSong();
+    },
+    ranDomSong: function() {
+        var prevSongIndex = [];
+        let newIndex; 
+        do {
+            newIndex = Math.floor(Math.random() * this.songs.length);
+        } while( newIndex === this.currentIndex)
+        this.currentIndex = newIndex;
+        this.loadCurrentSong();
+        
+    },
+    repeatSóng: function() {
+
+    },
+    start: function() {
+        // định nghĩa các thuộc tính cho object
+        this.defineProperties();
+
+        // lắng nge và xử lý các sự kiện
+        this.handleEvents();
+
+        // tải thông tin bài hát đầu tiên vào ui
+        this.loadCurrentSong();
+
+        // render ra giao diện người dùng
+        this.render();
+
+
     },
 };
 
@@ -91,50 +251,16 @@ app.start();
 
 const songFavorite = document.querySelector('.header_favorite-song-icon');
 const toggleFavorite = document.querySelectorAll('.header_favorite-song .header-desc');
-const btnPause = document.querySelector('.music .btn-play-pause .icon-pause');
-const btnPlay = document.querySelector('.music .btn-play-pause .icon-play');
-var audio = document.getElementsByTagName('audio')[(Math.floor(Math.random() * 6))];
-var cd = document.querySelector('.cd .cd-thum');
+
+
+
 var btnIncreaseVolume = document.querySelector('.range-volumn_icon-increase');
 var btnDecreaseVolume = document.querySelector('.range-volumn_icon-decrease');
-let isPlaying = false;
-var updateTime = document.  getElementById('range-time-input-id');
-var btnNext = document.querySelector('.btn-next');
-var btnPrev = document.querySelector('.btn-prev');
-let index_Song = 0;
-let isRandom = false;
 
-//khi bấm vào nút play thì phát nhạc
-btnPlay.addEventListener('click', function() {
-    audio.play();
-    cd.classList.add('rotate')
-});
 
-// khi bấm vào nút play thì nút play biến mất
-// và nút pause hiện lên
-btnPlay.addEventListener('click',function() {
-    btnPlay.classList.add('hiden');
-    btnPause.classList.remove('hiden');
-});
 
-// khi bấm vào nút pause thì nhạc dừng lại
-btnPause.addEventListener('click', function() {
-   audio.pause();
-    cd.classList.remove('rotate')
 
-});
 
-// khi bấm vào nút pause thì thì nút pause biến mất nút play
-// hiện ra
-btnPause.addEventListener('click',function() {
-    btnPause.classList.add('hiden');
-    btnPlay.classList.remove('hiden');
-});
-
-// khi nhấn nút next thì sẽ phát bài hát tiếp theo
-btnNext.onclick = function() {
-
-}
 // click vào favorite
 songFavorite.addEventListener('click', function() {
     songFavorite.classList.toggle('songFavorite');  
@@ -148,17 +274,7 @@ songFavorite.addEventListener('click', function() {
     }
 });
 
-// làm thanh chạy thời gian khi phát nhạc
-updateTime.addEventListener('input', function(e) {
-    const percentComplete = updateTime.value;
-    const newTime = (percentComplete / 100) * audio.duration;
-    audio.currentTime = newTime;
-});
 
-updateTime.addEventListener('timeupdate', function() {
-    const percentComplete = (audio.currentTime / audio.duration) * 100;
-    updateTime.value = percentComplete;
-})
 
 
 function increaseVolumn() {
