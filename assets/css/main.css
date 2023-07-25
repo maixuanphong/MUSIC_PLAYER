@@ -1,5 +1,5 @@
 html {
-    background-image: linear-gradient(var(--primary-color), var(--primary-color-change));
+    background-image: linear-gradient(var(--primary-color), var(--primary-color-change),var(--primary-color));
     height: 100%;
 }
 
@@ -160,7 +160,7 @@ html {
     -moz-appearance: none;
     appearance: none;
     height: 6px;
-    background-color: var(--text-color);
+    background-image: linear-gradient(to right, var(--time-color),var(--time-color-change));
     -webkit-transition: 0.2s;
     transition: opacity 0.2s;
     cursor: pointer;    
@@ -197,7 +197,7 @@ html {
     -moz-appearance: none;
     appearance: none;
     height: 4px;
-    background-color: var(--text-color);
+    background-image: linear-gradient(to right,var(--time-color-change), var(--time-color));
     -webkit-transition: 0.2s;
     transition: opacity 0.2s;
     border-radius: 3px;
@@ -205,6 +205,8 @@ html {
     width: 30%;
     cursor: pointer;
 }
+
+
 
 .range-volumn_input::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -290,6 +292,11 @@ html {
     color: (var(--primary-color));
 }
 
+.btn.btn-repeat {
+    position: relative;
+}
+
+
 /* playlist */
 .check-show-list-class:checked ~ .play-list {
     top:200px;
@@ -373,11 +380,51 @@ html {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 23px 10px 16px ;
+    padding: 1px 0 1px 0 ;
+}
+
+.item-music-wrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 68px;
+    width: 100%;
+    border-radius: 5px;
+    padding: 0 23px 0 16px;
+}
+
+.item-music-wrap:hover {
+    border: 1px solid #bb43bb;
+
+}
+
+.item-music-wrap:active {
+    opacity: 0.7;
+}
+
+
+/* những bài hát được active */
+.item-music.active .item-music-wrap{
+    border: 2px solid #f2eaf2;
+    border-radius: 5px;
+    background-color: #ca4eca;
+    color: var(--text-color);
+}
+
+.item-music.active .item-music_infor-name {
+    color: #333;
+}
+
+.item-music.active .item-music_infor_author {
+    color: #333;
+}
+
+.item-music.active:hover {
+    opacity: 1;
 }
 
 .item-music:hover {
-    border: 1px solid #9e209e;
     border-radius: 5px;
     cursor: pointer;
     opacity: 0.8;
@@ -388,7 +435,7 @@ html {
     height: 50px;
     overflow: hidden;
     border-radius: 10px;
-    box-shadow: 0 1px 3px #988796;
+    box-shadow: 0 1px 3px #413e41;
 }
 
 .item-music_img {
@@ -440,4 +487,51 @@ html {
 .songFavorite {
     color:rgb(226, 45, 45);
 }
+
+/* css ware */
+
+.stroke {
+    display: block;
+    background-color: #540350;
+    height: 10px;
+    width: 3px;
+    border-radius: 2px;
+    margin: 0 4px;
+    animation: animate 1.4s linear infinite;
+
+}
+
+@keyframes animate {
+    50% {
+        height: 20%;
+        background-color: #487264;
+    }
+    100% {
+        height: 100%;
+    }
+}
+
+.stroke:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.stroke:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.stroke:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.stroke:nth-child(4) {
+    animation-delay: 0.9s;
+}
+
+.stroke:nth-child(5) {
+    animation-delay: 0.6s;
+}
+.stroke:nth-child(6) {
+    animation-delay: 0.3s;
+}
+
 
