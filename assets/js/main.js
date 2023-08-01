@@ -37,6 +37,48 @@ const app = {
     isRepeat: false,
     songs: [
         {
+            name: 'Ta Đã Vất Vả Rồi Mà',
+            singer: '14 Casper & Bon Nghiêm',
+            path: './assets/mp3/ta đã vất vả rồi mà - 14 casper & bon nghiêm - lyrics video -.mp3',
+            imgage: './assets/img/cd/thoihoangkimcuata.jpg'
+        },
+        {
+            name: 'Có Ai Hẹn Hò Cùng Em Chưa',
+            singer: 'Quân AP',
+            path: './assets/mp3/CÓ AI HẸN HÒ CÙNG EM CHƯA - QUÂN A.P - OFFICIAL MV.mp3',
+            imgage: './assets/img/cd/coaihenhocungemchua.jpg'
+        },
+        {
+            name: 'Chờ Đợi Có Đáng Sợ',
+            singer: 'ANDIEZ',
+            path: './assets/mp3/CHỜ ĐỢI CÓ ĐÁNG SỢ - ANDIEZ.mp3',
+            imgage: './assets/img/cd/chodoicodangso.jpg'
+        },
+        {
+            name: 'Trước Khi Em Tồn Tại',
+            singer: 'Việt Anh - Cover',
+            path: './assets/mp3/Trước Khi Em Tồn Tại (Piano Version) - Thắng - Việt Anh Cover (MV Lyric).mp3',
+            imgage: './assets/img/cd/truockhiemtontai.jpg'
+        },
+        {
+            name: 'Những Kẻ Mộng Mơ',
+            singer: 'Noo Phước Thịnh',
+            path: './assets/mp3/Những Kẻ Mộng Mơ - Noo Phước Thịnh [Lyrics Video] Mưa..mp3',
+            imgage: './assets/img/cd/nhungKeMongMo.jpg'
+        },
+        {
+            name: 'Phai Nhòa Cảm Xúc',
+            singer: 'Mr.Siro',
+            path: './assets/mp3/[Mr. Siro Version] - Phai Nhòa Cảm Xúc.mp3',
+            imgage: './assets/img/cd/phaiNhoaCamXuc.jpg'
+        },
+        {
+            name: 'Making My Way',
+            singer: 'Sơn Tùng - MTP',
+            path: './assets/mp3/SON TUNG M-TP - MAKING MY WAY - OFFICIAL VISUALIZER.mp3',
+            imgage: './assets/img/cd/makingMyWay.jpg'
+        },
+        {
             name: 'Real Love',
             singer: 'My Anh x Khắc Hưng',
             path: './assets/mp3/Real-Love-The-Heroes-Version-My-Anh-Khac-Hung.mp3',
@@ -65,68 +107,7 @@ const app = {
             singer: 'Phong Max',
             path: './assets/mp3/Hoa Cỏ Lau Lofi (Ver 2) - Phong Max x Bụi Chill - Giữa Mênh Mang Đồi Hoa Cỏ Lau - Lyrics Video.mp3',
             imgage: './assets/img/cd/hoacolau.jpg'
-        },
-        {
-            name: 'Hoa Cỏ Lau',
-            singer: 'Phong Max',
-            path: './assets/mp3/Hoa Cỏ Lau Lofi (Ver 2) - Phong Max x Bụi Chill - Giữa Mênh Mang Đồi Hoa Cỏ Lau - Lyrics Video.mp3',
-            imgage: './assets/img/cd/hoacolau.jpg'
-        },
-        {
-            name: 'Hoa Cỏ Lau',
-            singer: 'Phong Max',
-            path: './assets/mp3/Hoa Cỏ Lau Lofi (Ver 2) - Phong Max x Bụi Chill - Giữa Mênh Mang Đồi Hoa Cỏ Lau - Lyrics Video.mp3',
-            imgage: './assets/img/cd/hoacolau.jpg'
-        },
-        {
-            name: 'Hoa Cỏ Lau',
-            singer: 'Phong Max',
-            path: './assets/mp3/Hoa Cỏ Lau Lofi (Ver 2) - Phong Max x Bụi Chill - Giữa Mênh Mang Đồi Hoa Cỏ Lau - Lyrics Video.mp3',
-            imgage: './assets/img/cd/hoacolau.jpg'
-        },
-        {
-            name: 'Hoa Cỏ Lau',
-            singer: 'Phong Max',
-            path: './assets/mp3/Hoa Cỏ Lau Lofi (Ver 2) - Phong Max x Bụi Chill - Giữa Mênh Mang Đồi Hoa Cỏ Lau - Lyrics Video.mp3',
-            imgage: './assets/img/cd/hoacolau.jpg'
-        },
-        {
-            name: 'Phía Sau Một Cô Gái',
-            singer: 'Soobin Hoàng Sơn',
-            path: './assets/mp3/Phía Sau Một Cô Gái - Soobin Hoàng Sơn (Official Music Video 4K).mp3',
-            imgage: './assets/img/cd/soobin.webp'
-        },
-        {
-            name: 'Tháng Mấy Em Nhớ Anh',
-            singer: 'Hà Anh Tuấn',
-            path: './assets/mp3/[Official Lyric Video] Tháng Mấy Em Nhớ Anh- -- Hà Anh Tuấn.mp3',
-            imgage: './assets/img/cd/thangmayemnhianh.jpg'
-        },
-        {
-            name: 'Tình Đầu',
-            singer: 'Tăng Duy Tân',
-            path: './assets/mp3/TÌNH ĐẦU - Tăng Duy Tân - Official Music Video.mp3',
-            imgage: './assets/img/cd/tinhdau.jpg'
-        },
-        {
-            name: 'Phía Sau Một Cô Gái',
-            singer: 'Soobin Hoàng Sơn',
-            path: './assets/mp3/Phía Sau Một Cô Gái - Soobin Hoàng Sơn (Official Music Video 4K).mp3',
-            imgage: './assets/img/cd/soobin.webp'
-        },
-        {
-            name: 'Tháng Mấy Em Nhớ Anh',
-            singer: 'Hà Anh Tuấn',
-            path: './assets/mp3/[Official Lyric Video] Tháng Mấy Em Nhớ Anh- -- Hà Anh Tuấn.mp3',
-            imgage: './assets/img/cd/thangmayemnhianh.jpg'
-        },
-        {
-            name: 'Tình Đầu',
-            singer: 'Tăng Duy Tân',
-            path: './assets/mp3/TÌNH ĐẦU - Tăng Duy Tân - Official Music Video.mp3',
-            imgage: './assets/img/cd/tinhdau.jpg'
-        },
-        
+        },  
     ],
     defineProperties: function() {
         Object.defineProperty(this,'currentSong',{
